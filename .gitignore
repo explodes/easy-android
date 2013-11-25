@@ -1,0 +1,12 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+.DS_Store
+Studio/src/main/.classpath
+Studio/src/main/.settings/
+Studio/src/main/bin/
+Studio/src/main/gen/
+/bin/
+/gen/
+/.classpath
+/.settings
