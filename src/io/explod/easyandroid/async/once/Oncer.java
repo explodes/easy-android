@@ -1,4 +1,6 @@
-package io.explod.easyandroid.remote.once;
+package io.explod.easyandroid.async.once;
+
+import io.explod.easyandroid.async.IResultCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +72,7 @@ public abstract class Oncer<KeyType, DataType, ErrorType> {
 	 * @param runnable
 	 * @param callback
 	 */
-	public synchronized void once(final KeyType key, final OnceRunnable<DataType, ErrorType> runnable, final Callback<DataType, ErrorType> callback) {
+	public synchronized void once(final KeyType key, final OnceRunnable<DataType, ErrorType> runnable, final IResultCallback<DataType, ErrorType> callback) {
 		final boolean hasResult = this.hasResult(key);
 		if (hasResult) {
 			this.callCallbackWithKey(key, callback);
@@ -92,7 +94,7 @@ public abstract class Oncer<KeyType, DataType, ErrorType> {
 	 * @param error
 	 * @param callback
 	 */
-	protected void callCallbackWithData(final DataType data, final ErrorType error, final Callback<DataType, ErrorType> callback) {
+	protected void callCallbackWithData(final DataType data, final ErrorType error, final IResultCallback<DataType, ErrorType> callback) {
 		callback.onResult(data, error);
 	}
 
@@ -114,7 +116,7 @@ public abstract class Oncer<KeyType, DataType, ErrorType> {
 	 * @param key
 	 * @param callback
 	 */
-	private void callCallbackWithKey(final KeyType key, final Callback<DataType, ErrorType> callback) {
+	private void callCallbackWithKey(final KeyType key, final IResultCallback<DataType, ErrorType> callback) {
 		final Result<DataType, ErrorType> result = this.getResult(key);
 		this.callCallbackWithResult(result, callback);
 	}
@@ -125,7 +127,7 @@ public abstract class Oncer<KeyType, DataType, ErrorType> {
 	 * @param result
 	 * @param callback
 	 */
-	private void callCallbackWithResult(final Result<DataType, ErrorType> result, final Callback<DataType, ErrorType> callback) {
+	private void callCallbackWithResult(final Result<DataType, ErrorType> result, final IResultCallback<DataType, ErrorType> callback) {
 		final DataType data = result.getData();
 		final ErrorType error = result.getError();
 		this.callCallbackWithData(data, error, callback);
@@ -137,7 +139,7 @@ public abstract class Oncer<KeyType, DataType, ErrorType> {
 	 * @param key
 	 * @param callback
 	 */
-	private void holdingPattern(final KeyType key, final Callback<DataType, ErrorType> callback) {
+	private void holdingPattern(final KeyType key, final IResultCallback<DataType, ErrorType> callback) {
 		final Handler handler = new Handler();
 		final Runnable runnable = new Runnable() {
 			@Override
@@ -161,9 +163,9 @@ public abstract class Oncer<KeyType, DataType, ErrorType> {
 	 * @param runnable
 	 * @param callback
 	 */
-	private synchronized void executeRunnable(final KeyType key, final OnceRunnable<DataType, ErrorType> runnable, final Callback<DataType, ErrorType> callback) {
+	private synchronized void executeRunnable(final KeyType key, final OnceRunnable<DataType, ErrorType> runnable, final IResultCallback<DataType, ErrorType> callback) {
 		this.pendingLookups.add(key);
-		final Callback<DataType, ErrorType> onComplete = new Callback<DataType, ErrorType>() {
+		final IResultCallback<DataType, ErrorType> onComplete = new IResultCallback<DataType, ErrorType>() {
 			@Override
 			public void onResult(DataType data, ErrorType error) {
 				final Oncer<KeyType, DataType, ErrorType> self = Oncer.this;

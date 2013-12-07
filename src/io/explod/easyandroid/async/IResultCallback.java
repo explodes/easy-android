@@ -1,4 +1,4 @@
-package io.explod.easyandroid.remote.once;
+package io.explod.easyandroid.async;
 
 /**
  * Interface for async callbacks
@@ -8,7 +8,7 @@ package io.explod.easyandroid.remote.once;
  * @param <DataType>
  * @param <ErrorType>
  */
-public interface Callback<DataType, ErrorType> {
+public interface IResultCallback<DataType, ErrorType> {
 
 	/**
 	 * When an async operation is completed, this function is called

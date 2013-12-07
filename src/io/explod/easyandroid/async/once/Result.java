@@ -1,4 +1,4 @@
-package io.explod.easyandroid.remote.once;
+package io.explod.easyandroid.async.once;
 
 /**
  * Async result class. Stores data and errors
