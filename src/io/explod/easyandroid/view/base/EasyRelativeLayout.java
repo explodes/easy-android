@@ -1,5 +1,6 @@
-package io.explod.easyandroid.view;
+package io.explod.easyandroid.view.base;
 
+import io.explod.easyandroid.view.base.iface.IEasyViewGroup;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,7 +13,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public abstract class EasyRelativeLayout extends RelativeLayout implements IEasyView {
+public abstract class EasyRelativeLayout extends RelativeLayout implements IEasyViewGroup {
 
 
 	public EasyRelativeLayout(Context context) {
