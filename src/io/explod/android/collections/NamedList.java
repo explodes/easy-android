@@ -2,6 +2,14 @@ package io.explod.android.collections;
 
 import java.util.ArrayList;
 
+/**
+ * A list that has a name. Backed by ArrayList.
+ * 
+ * @author evan
+ * 
+ * @param <T>
+ *            The type of object this list holds
+ */
 public class NamedList<T> extends ArrayList<T> {
 
 	private static final long serialVersionUID = 6158584853980274284L;
@@ -13,10 +21,21 @@ public class NamedList<T> extends ArrayList<T> {
 		this.name = name;
 	}
 
+	/**
+	 * Get the name of this list
+	 * 
+	 * @return The name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+	 * Set the name of this list
+	 * 
+	 * @param name
+	 *            The name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
