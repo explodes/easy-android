@@ -1,6 +1,7 @@
 package io.explod.android.collections;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A List of NamedList<T>. Useful for NamedListExpandableListAdapters.
@@ -43,6 +44,24 @@ public class NamedListList<T> extends ArrayList<NamedList<T>> {
 			removed |= list.remove(item);
 		}
 		return removed;
+	}
+
+	/**
+	 * Remove empty lists from this list of lists
+	 * 
+	 * @return Whether or not any lists were cleared out
+	 */
+	public boolean removeEmptyLists() {
+		final List<NamedList<T>> removeMe = new ArrayList<NamedList<T>>();
+		for (final NamedList<T> list : this) {
+			if (list.size() == 0) {
+				removeMe.add(list);
+			}
+		}
+		for (final NamedList<T> list : removeMe) {
+			this.remove(list);
+		}
+		return removeMe.size() > 0;
 	}
 
 }
