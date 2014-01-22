@@ -17,7 +17,7 @@ public class WeakIterator<T> implements Iterator<T> {
 	/** The underlying iterator being pruned */
 	private Iterator<WeakReference<T>> iterator;
 	/** The next object to return */
-	private T next;
+	private T next = null;
 
 	/**
 	 * Construct this WeakIterator to iterate the given list

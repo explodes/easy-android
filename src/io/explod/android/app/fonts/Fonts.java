@@ -1,14 +1,15 @@
 package io.explod.android.app.fonts;
 
-import io.explod.android.app.iface.ISetTypeface;
-import io.explod.android.app.view.exception.InvalidViewException;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import io.explod.android.app.iface.ISetTypeface;
 
 /**
  * Class to handle the loading of
@@ -17,6 +18,8 @@ import android.widget.TextView;
  * 
  */
 public class Fonts {
+
+    private static final String TAG = "Fonts";
 
 	/**
 	 * Load a font from assets. Shortcut method.
@@ -50,12 +53,10 @@ public class Fonts {
 	 * @param root
 	 *            Root {@link android.view.View} containing the subviews to search for
 	 * @param viewIds
-	 *            Comma seperated list of view resIds that are under {@value root}
-	 * @throws InvalidViewException
-	 *             Thrown when a {@link android.view.View} is found that is not one of the supported types
-	 * 
+	 *            Comma separated list of view resIds that are under {@value root}
+	 *
 	 */
-	public static final void setViewFonts(Typeface font, View root, int... viewIds) throws InvalidViewException {
+	public static final void setViewFonts(Typeface font, View root, int... viewIds) {
 		for (final int viewId : viewIds) {
 			final View view = root.findViewById(viewId);
 			if (view instanceof TextView) {
@@ -68,7 +69,7 @@ public class Fonts {
 				((ISetTypeface) view).setTypeface(font);
 			} else {
 				final String message = String.format("Invalid view: #%x: %s", viewId, view);
-				throw new InvalidViewException(message);
+				Log.e(TAG, message);
 			}
 		}
 	}
