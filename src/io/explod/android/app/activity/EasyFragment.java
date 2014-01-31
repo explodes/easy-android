@@ -8,28 +8,31 @@ import android.view.ViewGroup;
 
 /**
  * Abstract implementation of {@link IEasyActivity} <br/>
- * 
+ * <p/>
  * Includes the things that one must usually always do, like picking a layout resId, and setting fonts. <br/>
- * 
+ * <p/>
  * {@link #onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)} is specialized to automatically inflate layout resIds returned
  * by {@link #getLayoutId()} and set view fonts by calling {@link #setFonts(android.content.Context)}
- * 
+ *
  * @author evan
- * 
  */
 public abstract class EasyFragment extends Fragment implements IEasyFragment {
 
-	public EasyFragment() {
-	}
+    private View rootView;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final int layoutId = this.getLayoutId();
-		if (layoutId != 0) {
-			final View rootView = inflater.inflate(layoutId, container, false);
-			return rootView;
-		} else {
-			return null;
-		}
-	}
+    public EasyFragment() {
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final int layoutId = this.getLayoutId();
+        if (layoutId != 0) {
+            if (this.rootView == null) {
+                this.rootView = inflater.inflate(layoutId, container, false);
+            }
+            return rootView;
+        } else {
+            return null;
+        }
+    }
 }
