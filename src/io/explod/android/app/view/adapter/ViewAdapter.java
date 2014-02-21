@@ -48,16 +48,27 @@ public abstract class ViewAdapter<ViewType extends View, DataType> extends Array
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewType view;
+        final int viewType = this.getItemViewType(position);
         if (convertView == null) {
             final Context context = this.getContext();
-            view = this.createView(context);
+            view = this.createView(context, viewType);
         } else {
             view = (ViewType) convertView;
         }
 
         final DataType data = this.getItem(position);
-        this.updateView(view, data);
+        this.updateView(view, data, viewType);
         return view;
+    }
+
+    /**
+     * Get an individual point of data at a position.
+     *
+     * @param position The position to get data from
+     * @return The data item at the given position
+     */
+    public DataType getItem(int position) {
+        return this.data.get(position);
     }
 
     /**
@@ -73,17 +84,19 @@ public abstract class ViewAdapter<ViewType extends View, DataType> extends Array
     /**
      * Create, and only create, a new instance of ViewType
      *
-     * @param context Context to construct the view with
+     * @param context  Context to construct the view with
+     * @param viewType The view type to create, as specified by with {@link #getItemViewType(int)}
      * @return A new, unpopulated, ViewType
      */
-    public abstract ViewType createView(Context context);
+    public abstract ViewType createView(Context context, int viewType);
 
     /**
      * Populate a ViewType view with DataType data
      *
-     * @param view View to populate with data
-     * @param data Data to populate view with
+     * @param view     View to populate with data
+     * @param data     Data to populate view with
+     * @param viewType The view type to populate, as specified by with {@link #getItemViewType(int)}
      */
-    public abstract void updateView(ViewType view, DataType data);
+    public abstract void updateView(ViewType view, DataType data, int viewType);
 
 }

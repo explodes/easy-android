@@ -1,5 +1,7 @@
 package io.explod.android.app.activity;
 
+import android.view.View;
+
 import io.explod.android.app.iface.ISetFonts;
 
 /**
@@ -11,10 +13,20 @@ import io.explod.android.app.iface.ISetFonts;
 public interface IEasyFragment extends ISetFonts {
 
     /**
-     * Return the layout ID for this fragment. Return 0 if you do not wish to
+     * @return Return the layout ID for this fragment. Return 0 if you do not wish to
      * automatically inflate.
-     *
-     * @return
      */
     public abstract int getLayoutId();
+
+    /**
+     * @return Return the root view of this fragment, if one has been created.
+     */
+    public abstract View getRootView();
+
+    /**
+     * Called when the root view has been created.
+     *
+     * @param rootView
+     */
+    public abstract void onRootViewCreated(View rootView);
 }

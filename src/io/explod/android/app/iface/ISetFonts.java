@@ -5,7 +5,7 @@ import android.content.Context;
 public interface ISetFonts {
 
     /**
-     * Set fonts for views and activities painlessy
+     * Set fonts for views and activities painlessly
      *
      * @param context
      */
