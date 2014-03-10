@@ -12,63 +12,72 @@ import android.view.animation.Interpolator;
  */
 public class PropertyAnimator {
 
-    // static
+	// static
 
-    public static PropertyAnimator ofFloat(Object target, String prop, float toValue) {
-        return new PropertyAnimator(ObjectAnimator.ofFloat(target, prop, toValue));
-    }
+	public static PropertyAnimator ofFloat(Object target, String prop, float toValue) {
+		return new PropertyAnimator(ObjectAnimator.ofFloat(target, prop, toValue));
+	}
 
-    public static PropertyAnimator ofFloat(Object target, String prop, float... values) {
-        return new PropertyAnimator(ObjectAnimator.ofFloat(target, prop, values));
-    }
+	public static PropertyAnimator ofFloat(Object target, String prop, float... values) {
+		return new PropertyAnimator(ObjectAnimator.ofFloat(target, prop, values));
+	}
 
-    public static PropertyAnimator ofInt(Object target, String prop, int toValue) {
-        return new PropertyAnimator(ObjectAnimator.ofInt(target, prop, toValue));
-    }
+	public static PropertyAnimator ofInt(Object target, String prop, int toValue) {
+		return new PropertyAnimator(ObjectAnimator.ofInt(target, prop, toValue));
+	}
 
-    public static PropertyAnimator ofInt(Object target, String prop, int... values) {
-        return new PropertyAnimator(ObjectAnimator.ofInt(target, prop, values));
-    }
+	public static PropertyAnimator ofInt(Object target, String prop, int... values) {
+		return new PropertyAnimator(ObjectAnimator.ofInt(target, prop, values));
+	}
 
-    // instance
+	// instance
 
-    /* default */ ObjectAnimator anim;
+	/* package */ObjectAnimator anim;
 
-    private PropertyAnimator(ObjectAnimator anim) {
-        this.anim = anim;
-    }
+	private PropertyAnimator(ObjectAnimator anim) {
+		this.anim = anim;
+	}
 
-    public PropertyAnimator setDuration(long duration) {
-        this.anim.setDuration(duration);
-        return this;
-    }
+	public PropertyAnimator setDuration(long duration) {
+		this.anim.setDuration(duration);
+		return this;
+	}
 
-    public PropertyAnimator setEvaluator(TypeEvaluator<?> evaluator) {
-        this.anim.setEvaluator(evaluator);
-        return this;
-    }
+	public PropertyAnimator setEvaluator(TypeEvaluator<?> evaluator) {
+		this.anim.setEvaluator(evaluator);
+		return this;
+	}
 
-    public PropertyAnimator setInterpolator(Interpolator interpolator) {
-        this.anim.setInterpolator(interpolator);
-        return this;
-    }
+	public PropertyAnimator setInterpolator(Interpolator interpolator) {
+		this.anim.setInterpolator(interpolator);
+		return this;
+	}
 
-    public PropertyAnimator setStartDelay(long delay) {
-        this.anim.setStartDelay(delay);
-        return this;
-    }
+	public PropertyAnimator setStartDelay(long delay) {
+		this.anim.setStartDelay(delay);
+		return this;
+	}
 
-    public PropertyAnimator addListener(Animator.AnimatorListener listener) {
-        this.anim.addListener(listener);
-        return this;
-    }
+	public PropertyAnimator addListener(Animator.AnimatorListener listener) {
+		this.anim.addListener(listener);
+		return this;
+	}
 
-    public PropertyAnimator cancel() {
-        this.anim.cancel();
-        return this;
-    }
+	public boolean isRunning() {
+		return this.anim.isRunning();
+	}
 
-    public void start() {
-        this.anim.start();
-    }
+	public boolean isStarted() {
+		return this.anim.isStarted();
+	}
+
+	public PropertyAnimator cancel() {
+		this.anim.cancel();
+		return this;
+	}
+
+	public PropertyAnimator start() {
+		this.anim.start();
+		return this;
+	}
 }
